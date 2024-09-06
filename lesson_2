@@ -1,0 +1,19 @@
+let accessAllowed;
+let age = "Скільки вам років?";
+
+if (age > 20) {
+  accessAllowed = true;
+} else {
+  accessAllowed = false;
+}
+
+console.log(accessAllowed); 
+---------------
+
+let i = 0;
+  while (i < 100) {
+    i++;
+  if  (i % 5 == 0){
+    console.log( i );
+  }
+}
