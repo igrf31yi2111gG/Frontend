@@ -1,0 +1,17 @@
+async function get() {
+
+  try {
+    let url = 'https://jsonplaceholder.typicode.com/todos/1';
+    let response = await fetch(url);
+    let commits = await response.text(); 
+
+      console.log(commits);
+
+    
+  } catch (error) {
+    console.error(error);
+  }
+  
+}
+
+get()
