@@ -1,0 +1,13 @@
+
+function showMessage(...arr) {
+  const result = {};
+  for (const obj of arr) {
+    Object.assign(result, obj);
+  }
+  return result;
+}
+
+const obj1 = { a: 1 };
+const obj2 = { b: 9 };
+let merged = showMessage(obj1, obj2);
+console.log(merged);
