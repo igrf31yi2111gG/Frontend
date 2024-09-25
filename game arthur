@@ -1,9 +1,9 @@
 
 #Концепт гри: ухилятися від ракет
 
-import pygame;
-import lib/game;
-import random;
+import pygame
+#import lib/game
+import random
 
 pygame.init()
 
@@ -11,63 +11,62 @@ screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-background_image = pygame.image.load("pixilart-drawing (1).png").convert()
-
+background_image = pygame.image.load("pixilart-drawing(1)").convert()
 character_image = pygame.image.load("pixilart-drawing.png").convert_alpha()
-character_rect = character_image.get_rect(center=(screen_width // 2, screen_height //
-2))
+character_rect = character_image.get_rect(center=(screen_width // 2, screen_height // 2))
 character_speed = 5
 
-rocket_image = pygame.image.load("rock.png").convert_alpha()  
+rocket_image = pygame.image.load("rock.png").convert_alpha()
 rocket_speed = 5
 rockets = []
 
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-if random.randint(0, 100) < 5: 
-    rocket_rect = rocket_image.get_rect(center=(random.randint(0, screen_width), 0))
-    rockets.append(rocket_rect)
-
-for rocket_rect in rockets:
-    rocket_rect.y += rocket_speed
-    if rocket_rect.bottom > screen_height:
-        rockets.remove(rocket_rect)
-
-for rocket_rect in rockets:
-    if character_rect.colliderect(rocket_rect):
-        running = False 
-        break
+start_time = pygame.time.get_ticks()
 
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-      
+
+
+    if random.randint(0, 100) < 5: 
+        rocket_rect = rocket_image.get_rect(center=(random.randint(0, screen_width), 0))
+        rockets.append(rocket_rect)
+
+
+    rockets = [rocket for rocket in rockets if rocket.bottom <= screen_height]
+    for rocket_rect in rockets:
+        rocket_rect.y += rocket_speed
+
+
+    for rocket_rect in rockets:
+        if character_rect.colliderect(rocket_rect):
+            running = False 
+            break
+
+  
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
-          character_rect.x -= character_speed
+        character_rect.x -= character_speed
     if keys[pygame.K_RIGHT]:
         character_rect.x += character_speed
-     
-    character_rect.left = max(character_rect.left, 0)
-    character_rect.right = min(character_rect.right, screen_width)
 
     character_rect.left = max(character_rect.left, 0)
     character_rect.right = min(character_rect.right, screen_width)
+
 
     elapsed_time = (pygame.time.get_ticks() - start_time) // 1000
-    timer_text = font.render(f"Time: {elapsed_time}", True, (255, 255, 255))  
-    screen.blit(timer_text, (10, 10))
-    
+
+
+    font = pygame.font.Font(None, 36) 
+    timer_text = font.render(f"Time: {elapsed_time}", True, (255, 255, 255))
+
+ 
     screen.blit(background_image, (0, 0))
     for rocket_rect in rockets:
         screen.blit(rocket_image, rocket_rect)
     screen.blit(character_image, character_rect)
+    screen.blit(timer_text, (10, 10))
 
     pygame.display.flip()
 
