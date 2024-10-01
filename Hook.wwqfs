@@ -1,0 +1,23 @@
+import "./styles.css";
+import { useState } from "react";
+
+export default function App() {
+  const [name, setName] = useState("op");
+
+  setName("Robin");
+
+  return (
+    <div className="App">
+      <h1>{name}</h1>
+      <EN jyt={420939} />
+    </div>
+  );
+}
+
+function EN({ jyt }) {
+  return (
+    <div className="EN">
+      <h1>Hello regwrgwrr{jyt}</h1>
+    </div>
+  );
+}
