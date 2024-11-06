@@ -1,4 +1,3 @@
-
 #Концепт гри: ухилятися від ракет
 
 import pygame
@@ -7,17 +6,19 @@ import random
 
 pygame.init()
 
-screen_width = 800
-screen_height = 600
+screen_width = 1000
+screen_height = 800
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-background_image = pygame.image.load("pixilart-drawing(1)").convert()
-character_image = pygame.image.load("pixilart-drawing.png").convert_alpha()
+background_image = pygame.image.load("C:/Users/Student_1/Desktop/Гра/Backround.png").convert_alpha()
+background_image = pygame.transform.scale(background_image, (screen_width, screen_height))
+character_image = pygame.image.load("C:/Users/Student_1/Desktop/Гра/Man.png").convert_alpha()
 character_rect = character_image.get_rect(center=(screen_width // 2, screen_height // 2))
-character_speed = 5
+character_speed = 1
 
-rocket_image = pygame.image.load("rock.png").convert_alpha()
-rocket_speed = 5
+rocket_image = pygame.image.load("C:/Users/Student_1/Desktop/Гра/rocket.png").convert_alpha()
+rocket_image = pygame.transform.scale(rocket_image, (100, 50))
+rocket_speed = 1
 rockets = []
 
 start_time = pygame.time.get_ticks()
