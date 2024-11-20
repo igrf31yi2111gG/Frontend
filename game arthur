@@ -1,3 +1,5 @@
+#Концепт гри: ухилятися від ракет
+
 import pygame
 import random
 
@@ -11,7 +13,7 @@ background_image = pygame.image.load("C:/Users/Student_1/Desktop/Гра/Backroun
 background_image = pygame.transform.scale(background_image, (screen_width, screen_height))
 character_image = pygame.image.load("C:/Users/Student_1/Desktop/Гра/Man.png").convert_alpha()
 character_image = pygame.transform.scale(character_image, (30, 100))
-character_rect = character_image.get_rect(center=(screen_width // 2, screen_height - character_image.get_height() // 1))  
+character_rect = character_image.get_rect(center=(screen_width // 2, screen_height - character_image.get_height() // 1))
 character_speed = 1
 
 rocket_image = pygame.image.load("C:/Users/Student_1/Desktop/Гра/rocket.png").convert_alpha()
@@ -19,7 +21,7 @@ rocket_image = pygame.transform.scale(rocket_image, (40, 120))
 rocket_speed = 1
 rockets = []
 
-start_time = pygame.time.get_ticks()                 
+start_time = pygame.time.get_ticks()
 
 running = True
 while running:
@@ -27,7 +29,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    if random.randint(0, 100) < 5: 
+    if random.randint(0, 100) < 2:
         rocket_rect = rocket_image.get_rect(center=(random.randint(0, screen_width), 0))
         rockets.append(rocket_rect)
 
@@ -43,8 +45,10 @@ while running:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         character_rect.x -= character_speed
+        character_image = pygame.transform.flip(character_image, True, False)  # Flip the character image horizontally
     if keys[pygame.K_RIGHT]:
         character_rect.x += character_speed
+        character_image = pygame.transform.flip(character_image, False, False) 
 
     character_rect.left = max(character_rect.left, 0)
     character_rect.right = min(character_rect.right, screen_width)
